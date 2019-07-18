@@ -6,7 +6,7 @@
  * Time: 13:52
  */
 
-namespace App\Channels;
+namespace KUHdo\Webhookable\Channels;
 use App\Notifications\WebHookNotification;
 use Illuminate\Notifications\Notification;
 use App\Exceptions\WebHookFailedException;
