@@ -23,12 +23,12 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Barryvdh\\Debugbar\\ServiceProvider"
+                "Kuhdo\\Webhookable\\ServiceProvider"
             ]
-        },
-        "aliases": {
-            "Debugbar": "Barryvdh\\Debugbar\\Facade"
         }
+    },
+     "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }
 
