@@ -4,7 +4,7 @@ namespace KUHdo\Webhookable;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class WebhookableProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
