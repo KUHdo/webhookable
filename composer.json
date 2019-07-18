@@ -23,7 +23,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Kuhdo\\Webhookable\\ServiceProvider"
+                "KUHdo\\Webhookable\\ServiceProvider"
             ]
         }
     },
