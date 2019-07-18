@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": "^7.1.3",
-        "illuminate/support": "5.8^"
+        "illuminate/support": "^5.8"
     },
     "require-dev": {
         "orchestra/testbench": "^3.5"
@@ -24,7 +24,8 @@
         "laravel": {
             "providers": [
                 "Barryvdh\\Debugbar\\ServiceProvider"
-            ],
+            ]
+        },
         "aliases": {
             "Debugbar": "Barryvdh\\Debugbar\\Facade"
         }
