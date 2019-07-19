@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'auth:api'], function() {
+Route::prefix('webhookable/api/' , function() {
     ///////////////
     // RestHooks //
     ///////////////
@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     // zapier route
     Route::get('polling/trigger', 'KUHdo\Webhookable\Controllers\RestHooksController@pollForTrigger')
         ->middleware('auth:api');
+
+    Route::apiResource('subscription', 'KUHdo\Webhookable\Controllers\RestHooksController')
+        ->middleware('auth:api');
 });
-Route::apiResource('subscription', 'KUHdo\Webhookable\Controllers\RestHooksController')
-    ->middleware('auth:api');

@@ -2,17 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Events\SaveTradingMonthsEod;
-use App\Notifications\WebHookNotification;
-use App\TradingMonthEod;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Event;
+use KUHdo\Webhookable\Notifications\WebHookNotification;
 use Illuminate\Support\Facades\Notification;
 use Laravel\Passport\ClientRepository;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Faker\Factory as Faker;
 
 
 /**
@@ -26,10 +21,9 @@ class TradingMonthsEodTest extends TestCase
 
 
     /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function testTradingMonthEodCreatedWebHook() {
-        $clients = app()->make(ClientRepository::class);
+        $clients = resolve(ClientRepository::class);
         $user = factory('App\User')->create();
         $clients->createPersonalAccessClient(
             $user->id, $user->name, 'https://example.org'
@@ -50,7 +44,7 @@ class TradingMonthsEodTest extends TestCase
      *
      */
     public function testTradingMonthEodUpdatedWebHook() {
-        $clients = app()->make(ClientRepository::class);
+        $clients = resolve(ClientRepository::class);
         $user = factory('App\User')->create();
         $clients->createPersonalAccessClient(
             $user->id, $user->name, 'https://example.org'

@@ -23,8 +23,8 @@ class WebhookableProvider extends ServiceProvider
             __DIR__.'/../database/migrations/' => database_path('migrations')
         ], 'migrations');
         $this->publishes([
-            __DIR__.'/../resources/js/components' => base_path('resources/js/components/passport'),
-        ], 'passport-components');
+            __DIR__.'/../resources/js/components' => base_path('resources/js/components/webhookable'),
+        ], 'webhookable-components');
 
         $this->publishes([
         __DIR__.'/translations' => resource_path('lang/vendor/webhookable'),
