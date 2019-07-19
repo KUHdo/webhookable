@@ -6,12 +6,9 @@
  * Time: 17:01
  */
 
-namespace App\Repositories\WebHook;
-use App\Commodity;
-use App\Notifications\Messages\DeprecatedRestHookMessage;
-use App\WebHook;
+namespace KUHdo\Webhookable\Repositories\WebHook;
+use KUHdo\Webhookable\WebHook;
 use Illuminate\Support\Collection;
-use App\TradingMonth;
 
 
 interface WebHookRepository

@@ -6,11 +6,11 @@
  * Time: 08:39
  */
 
-namespace App\Repositories\WebHook;
+namespace KUHdo\Webhookable\Repositories\WebHook;
 
 
-use App\Notifications\WebHookNotification;
-use App\WebHook;
+use KUHdo\Webhookable\Notifications\WebHookNotification;
+use KUHdo\Webhookable\WebHook;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;

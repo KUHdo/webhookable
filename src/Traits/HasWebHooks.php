@@ -6,10 +6,10 @@
  * Time: 13:55
  */
 
-namespace App\Traits;
+namespace KUHdo\Webhookable\Traits;
 
 
-use App\WebHook;
+use KUHdo\Webhookable\WebHook;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasWebHooks

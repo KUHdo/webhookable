@@ -6,7 +6,7 @@
  * Time: 10:19
  */
 
-namespace App\Contracts;
+namespace KUHdo\Webhookable\Contracts;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 interface Webhookable

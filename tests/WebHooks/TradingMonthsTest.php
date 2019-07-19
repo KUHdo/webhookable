@@ -2,13 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Events\SaveTradingMonthsEod;
 use App\Notifications\WebHookNotification;
-use App\WebHook;
+use KUHdo\Webhookable\WebHook;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
-use Laravel\Passport\ClientRepository;
-use Tests\TestCase;
+use Orchestra\Testbench\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Faker\Factory as Faker;
@@ -16,6 +14,35 @@ use Faker\Factory as Faker;
 class TradingMonthsTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
+    /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     * @return void
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        // Setup default database to use sqlite :memory:
+        $app['config']->set('database.default', 'testbench');
+        $app['config']->set('database.connections.testbench', [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+        ]);
+    }
+
+    /**
+     * Setup the test environment.
+     */
+    protected function setUp() : void
+    {
+        parent::setUp();
+
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        // and other test setup steps you need to perform
+        $this->withFactories(__DIR__.'/factories');
+    }
+
     /**
      *
      */

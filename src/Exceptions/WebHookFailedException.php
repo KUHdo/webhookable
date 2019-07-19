@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Exceptions;
+namespace KUHdo\Webhookable\Exceptions;
 
 use Exception;
-use Log;
 
 class WebHookFailedException extends Exception
 {

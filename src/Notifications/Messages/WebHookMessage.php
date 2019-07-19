@@ -7,10 +7,10 @@
  * Credits: https://github.com/laravel-notification-channels/webhook
  */
 
-namespace App\Notifications\Messages;
+namespace KUHdo\Webhookable\Notifications\Messages;
 
 
-use App\Contracts\Webhookable;
+use KUHdo\Webhookable\Contracts\Webhookable;
 use Illuminate\Support\Str;
 
 class WebHookMessage

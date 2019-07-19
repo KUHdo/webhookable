@@ -3,12 +3,12 @@
 namespace Tests\Feature\WebHooks;
 
 use App\Repositories\WebHook\WebHookRepository;
-use App\WebHook;
+use KUHdo\Webhookable\WebHook;
 use Event;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Laravel\Passport\ClientRepository;
-use Tests\TestCase;
+use Orchestra\Testbench\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

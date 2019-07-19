@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace KUHdo\Webhookable;
 
 use Illuminate\Database\Eloquent\Model;
 

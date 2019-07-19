@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Notifications;
+namespace KUHdo\Webhookable\Notifications;
 
-use App\Channels\WebHookChannel;
-use App\Notifications\Messages\DeprecatedRestHookMessage;
-use App\Notifications\Messages\WebHookMessage;
-use App\Repositories\WebHook\WebHookRepository;
-use App\WebHook;
+use KUHdo\Webhookable\Channels\WebHookChannel;
+use KUHdo\Webhookable\Notifications\Messages\WebHookMessage;
+use KUHdo\Webhookable\Repositories\WebHook\WebHookRepository;
+use KUHdo\Webhookable\WebHook;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
