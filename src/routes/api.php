@@ -13,17 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('api/' , function() {
-    ///////////////
-    // RestHooks //
-    ///////////////
-
-    //POST /api/hooks - subscribe
-    // http://resthooks.org/docs/
-    // zapier route
-    Route::get('polling/trigger', 'KUHdo\Webhookable\Controllers\RestHooksController@pollForTrigger')
-        ->middleware('auth:api');
-
-    Route::apiResource('subscription', 'KUHdo\Webhookable\Controllers\RestHooksController')
-        ->middleware('auth:api');
+Route::prefix('api/')
+    ->middleware(['middleware' => 'auth:api'])
+    ->group(function() {
+        // Zapier route
+        Route::get('polling/trigger', 'KUHdo\Webhookable\Controllers\RestHooksController@pollForTrigger');
+        // RestHooks
+        // http://resthooks.org/docs/
+        Route::apiResource('subscription', 'KUHdo\Webhookable\Controllers\RestHooksController');
 });
