@@ -11,8 +11,6 @@ use KUHdo\Webhookable\WebHook;
 
 class RestHooksController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
     /**
      * Display a listing of the resource.
      *

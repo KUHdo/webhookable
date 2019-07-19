@@ -8,19 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class WebHook extends Model
 {
     /**
-     * @var string
+     * @var string table name
      */
     protected $table = 'web_hooks';
 
     /**
      * @var array
      */
-    public $hidden = ['webhookable_type', 'webhookable_id', 'possibleEvents', 'method', 'payload'];
+    public $hidden = [
+        'webhookable_type',
+        'webhookable_id',
+        'possibleEvents',
+        'method',
+        'payload'
+    ];
 
     /**
      * @var array
      */
-    public $fillable = ['id', 'url', 'event'];
+    public $fillable = [
+        'id',
+        'url',
+        'event'
+    ];
 
     /**
      * @var array
@@ -37,7 +47,7 @@ class WebHook extends Model
     protected $payload;
 
     /**
-     * @var array
+     * @var array $appends
      */
     public $appends = [
         'possibleEvents',
@@ -46,9 +56,11 @@ class WebHook extends Model
 
     /**
      * array of possible events to subscribe to
+     *
      * @return array
      */
-    public static function getPossibleEventsAttribute() {
+    public static function getPossibleEventsAttribute()
+    {
         return [
                 'tradingMonth.*',
                 'tradingMonth.created',
@@ -64,20 +76,23 @@ class WebHook extends Model
                 'tradingMonthEod.updated',
                 'commodity.*',
                 'commodity.touched',
-               ];
+        ];
     }
 
     /**
      * gets the request method of an event
      * @return mixed
      */
-    public function getMethodAttribute() : string {
+    public function getMethodAttribute() : string
+    {
         $event = explode('.', $this->event)[1] ?? 'POST';
         return $this->methods[$event] ?? $event;
     }
 
     /**
-     * @return null
+     * Get actual payload (not persisted)
+     *
+     * @return string
      */
     public function getPayloadAttribute()
     {
@@ -96,6 +111,8 @@ class WebHook extends Model
 
     /**
      * Get all of the owning webhookable models.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function webhookable()
     {

@@ -7,6 +7,7 @@ use KUHdo\Webhookable\WebHook;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Mockery as m;
 
 /**
  * Class RepositoryTest
@@ -17,19 +18,23 @@ class RepositoryTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * @var WebHookRepository $webHookRepo
-     */
-    private $webHookRepo;
-
-    /**
-     * Setup the test environment.
+     * Define environment setup.
      *
+     * @param  \Illuminate\Foundation\Application  $app
      * @return void
      */
-    protected function setUp(): void
+    protected function getEnvironmentSetUp($app)
     {
-        parent::setUp();
-        $this->webHookRepo = resolve(WebHookRepository::class);
+        // and other test setup steps you need to perform
+        $this->withFactories(base_path() .'/database/factories');
+
+
+    }
+
+
+    public function tearDown() : void
+    {
+        m::close();
     }
 
     /**
@@ -38,7 +43,9 @@ class RepositoryTest extends TestCase
      */
     public function testMatchingEvent()
     {
-        $webHooks = factory('App\WebHook', 25)->make();
+
+        $webHooks = factory('KUHdo\Webhookable\WebHook', 25)->make();
+        dd($webHooks);
         $user = factory('App\User')->create();
 
         $webHooks->transform(function(WebHook $hook) use ($user) {
@@ -49,7 +56,8 @@ class RepositoryTest extends TestCase
         });
 
         $randomHook = $webHooks->random();
-        $matchingHooksRepo = $this->webHookRepo->matchingEvents($randomHook->event);
+        $webhookRepo = m::mock(WebHookRepository::class);
+        $matchingHooksRepo = $webhookRepo->shouldReceive('matchingEvents')->with($randomHook->event)->andReturn();
 
         if(Str::contains($randomHook->event, '*')) {
             $matchingHooksCol = $webHooks->filter(function(WebHook $hook) use ($randomHook) {
