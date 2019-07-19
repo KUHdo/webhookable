@@ -6,8 +6,7 @@
  * Time: 08:39
  */
 
-namespace KUHdo\Webhookable\Repositories\WebHook;
-
+namespace KUHdo\Webhookable\Repositories;
 
 use KUHdo\Webhookable\Notifications\WebHookNotification;
 use KUHdo\Webhookable\WebHook;
@@ -18,62 +17,6 @@ use Illuminate\Support\Str;
 
 class EloquentWebHook implements WebHookRepository
 {
-    /**
-     * deprecated
-     * @param WebHook $hook
-     * @return bool
-     */
-    public function urlHasVariables(WebHook $hook): bool
-    {
-        return Str::contains($hook->url, ['{', '}', '{}']);
-    }
-
-    /**
-     * deprecated
-     * @param WebHook $hook
-     * @return array variables
-     */
-    public function urlVariables(WebHook $hook): array
-    {
-        if($this->urlHasVariables($hook)) {
-            return collect(explode('{', $hook->url))->filter(function($var) {
-                return Str::endsWith($var, ['}', '}/']);
-            })->transform(function($var) {
-                return Str::before($var, '}');
-            })->unique()->toArray();
-        }
-        return [];
-    }
-
-
-    /**
-     * deprecated
-     * @param WebHook $hook
-     * @param Model| Arrayable $data
-     * @return WebHook
-     * @throws \ErrorException
-     */
-    public function replaceVars(WebHook $hook, $data): WebHook
-    {
-        $vars = $this->urlVariables($hook);
-        foreach($vars as $var) {
-            if($data instanceof Model) {
-                if(array_key_exists($var, $data->attributesToArray())) {
-                    $hook->url = str_replace('{'.$var . '}', urlencode($data->$var), $hook->url);
-                } else {
-                    throw new \ErrorException("Undefined property on model");
-                }
-            } else {
-                if(array_key_exists($var, (array) $data)) {
-                    $hook->url = str_replace('{'.$var . '}', urlencode($data[$var]), $hook->url);
-                } else {
-                    throw new \ErrorException("Could not replace var, key not found!");
-                }
-            }
-        }
-        return $hook;
-    }
-
     /**
      * if there is an astrix in the event name it returns
      * all matching events

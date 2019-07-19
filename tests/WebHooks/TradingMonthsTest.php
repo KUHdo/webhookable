@@ -2,14 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Notifications\WebHookNotification;
-use KUHdo\Webhookable\WebHook;
+use KUHdo\Webhookable\Notifications\WebHookNotification;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Faker\Factory as Faker;
+use Laravel\Passport\ClientRepository;
 
 class TradingMonthsTest extends TestCase
 {
@@ -38,59 +37,13 @@ class TradingMonthsTest extends TestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->loadMigrationsFrom([
+            '--database' => 'testing',
+            '--path' => realpath(__DIR__.'/../database/migrations'),
+        ]);
         // and other test setup steps you need to perform
-        $this->withFactories(__DIR__.'/factories');
-    }
-
-    /**
-     *
-     */
-    public function testCreateEventTradingMonth()
-    {
-        $faker = Faker::create();
-        $number = $faker->numberBetween(1,19);
-        Event::fake();
-
-        $commodity = factory('App\Commodity')->create();
-        factory('App\TradingMonth', $number)->create(["commodity_id" => $commodity->id]);
-
-        Event::assertDispatched('eloquent.created: App\TradingMonth', $number);
-    }
-    /**
-     *
-     */
-    public function testUpdateEventTradingMonth()
-    {
-        $faker = Faker::create();
-        $number = $faker->numberBetween(1,19);
-        Event::fake();
-
-        $commodity = factory('App\Commodity')->create();
-        $tradingMonths = factory('App\TradingMonth', $number)->create(["commodity_id" => $commodity->id]);
-        $tradingMonths->each(function($month) {
-           $month->update(factory('App\TradingMonth')->make()->toArray());
-        });
-
-        Event::assertDispatched('eloquent.updated: App\TradingMonth', $number);
-    }
-
-    /**
-     *
-     */
-    public function testDeleteEventTradingMonth()
-    {
-        $faker = Faker::create();
-        $number = $faker->numberBetween(1,19);
-        Event::fake();
-
-        $commodity = factory('App\Commodity')->create();
-        $tradingMonths = factory('App\TradingMonth', $number)->create(["commodity_id" => $commodity->id]);
-        $tradingMonths->each(function($month){
-            $month->delete();
-        });
-
-        Event::assertDispatched('eloquent.deleted: App\TradingMonth', $number);
+        $this->withFactories(__DIR__.'/../database/factories');
     }
 
     /**

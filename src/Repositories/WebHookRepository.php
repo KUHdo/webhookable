@@ -6,16 +6,24 @@
  * Time: 17:01
  */
 
-namespace KUHdo\Webhookable\Repositories\WebHook;
-use KUHdo\Webhookable\WebHook;
+namespace KUHdo\Webhookable\Repositories;
 use Illuminate\Support\Collection;
 
 
 interface WebHookRepository
 {
-    public function urlHasVariables(WebHook $hook): bool;
-    public function urlVariables(WebHook $hook): array;
+    /**
+     * @see \KUhdo\Webhookable\Repositories\EloquentWebHook::matchingEvents()
+     * @param String $event
+     * @return \Illuminate\Support\Collection
+     */
     public function matchingEvents(String $event): Collection;
+
+    /**
+     * @see \KUhdo\Webhookable\Repositories\EloquentWebHook::fire()
+     * @param String $event
+     * @param $data
+     */
     public function fire(String $event, $data): void;
-    public function replaceVars(WebHook $hook, $data): WebHook;
+
 }

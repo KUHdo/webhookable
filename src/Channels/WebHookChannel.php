@@ -7,8 +7,8 @@
  */
 
 namespace KUHdo\Webhookable\Channels;
-use App\Notifications\WebHookNotification;
-use Illuminate\Notifications\Notification;
+
+use KUHdo\Webhookable\Notifications\WebHookNotification;
 use KUHdo\Webhookable\Exceptions\WebHookFailedException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;

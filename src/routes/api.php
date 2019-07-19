@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +21,8 @@ Route::group(['middleware' => 'auth:api'], function() {
     //POST /api/hooks - subscribe
     // http://resthooks.org/docs/
     // zapier route
-    Route::get('polling/trigger', 'API\RestHooksController@pollForTrigger')->middleware('auth:api');
+    Route::get('polling/trigger', 'KUHdo\Webhookable\Controllers\RestHooksController@pollForTrigger')
+        ->middleware('auth:api');
 });
-Route::apiResource('subscription', 'API\RestHooksController')
+Route::apiResource('subscription', 'KUHdo\Webhookable\Controllers\RestHooksController')
     ->middleware('auth:api');
-
-

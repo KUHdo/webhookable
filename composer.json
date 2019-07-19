@@ -21,7 +21,8 @@
     },
     "require-dev": {
         "orchestra/testbench": "^3.8",
-        "orchestra/database": "^3.8"
+        "orchestra/database": "^3.8",
+        "laravel/passport": "^7.3"
     },
     "autoload": {
         "psr-4": {

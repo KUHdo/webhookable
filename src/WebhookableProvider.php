@@ -14,7 +14,7 @@ class WebhookableProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
-        $this->loadMigrationsFrom(__DIR__.'/src/Migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadTranslationsFrom(__DIR__.'/translations', 'webhookable');
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations')
@@ -35,8 +35,8 @@ class WebhookableProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Repositories\WebHook\WebHookRepository',
-            'App\Repositories\WebHook\EloquentWebHook'
+            'KUHdo\Webhookable\Repositories\WebHookRepository',
+            'KUHdo\Webhookable\Repositories\EloquentWebHook'
         );
 
     }

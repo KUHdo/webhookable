@@ -1,9 +1,9 @@
 <?php
 
-use App\WebHook;
+use KUHdo\Webhookable\WebHook;
 use Faker\Generator as Faker;
 
-$factory->define(App\WebHook::class, function (Faker $faker) {
+$factory->define(WebHook::class, function (Faker $faker) {
     return [
         'url' => $faker->url,
         'event' => $faker->randomElement(WebHook::getPossibleEventsAttribute()),

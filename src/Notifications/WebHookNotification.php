@@ -4,12 +4,11 @@ namespace KUHdo\Webhookable\Notifications;
 
 use KUHdo\Webhookable\Channels\WebHookChannel;
 use KUHdo\Webhookable\Notifications\Messages\WebHookMessage;
-use KUHdo\Webhookable\Repositories\WebHook\WebHookRepository;
+use KUHdo\Webhookable\Repositories\WebHookRepository;
 use KUHdo\Webhookable\WebHook;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class WebHookNotification extends Notification implements ShouldQueue
 {
@@ -47,14 +46,13 @@ class WebHookNotification extends Notification implements ShouldQueue
      * Create a new notification instance.
      *
      * @param WebHook $webHook
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function __construct(WebHook $webHook)
     {
         $this->webHook = $webHook;
         $this->payload = $webHook->payload;
 
-        $this->webHookRepo = app()->make(WebHookRepository::class);
+        $this->webHookRepo = resolve(WebHookRepository::class);
     }
 
     /**

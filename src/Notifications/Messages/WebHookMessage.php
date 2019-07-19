@@ -9,7 +9,6 @@
 
 namespace KUHdo\Webhookable\Notifications\Messages;
 
-
 use KUHdo\Webhookable\Contracts\Webhookable;
 use Illuminate\Support\Str;
 
