@@ -39,7 +39,7 @@ class WebhookableProvider extends ServiceProvider
     public function register()
     {
         if (! $this->app->configurationIsCached()) {
-            $this->mergeConfigFrom(__DIR__.'/../config/passport.php', 'passport');
+            $this->mergeConfigFrom(__DIR__.'/../config/webhookable.php', 'webhookable');
         }
         if ($this->app->runningInConsole()) {
             $this->publishes([

@@ -13,8 +13,20 @@ return [
     |
     */
 
-    'private_key' => env('PASSPORT_PRIVATE_KEY'),
-
-    'public_key' => env('PASSPORT_PUBLIC_KEY'),
-
+    'possible_events' => [
+        'tradingMonth.*',
+        'tradingMonth.created',
+        'tradingMonth.deleted',
+        'tradingMonth.updated',
+        'ifeMilkExchangeValue.*',
+        'ifeMilkExchangeValue.created',
+        'ifeMilkExchangeValue.deleted',
+        'ifeMilkExchangeValue.updated',
+        'tradingMonthEod.*',
+        'tradingMonthEod.created',
+        'tradingMonthEod.deleted',
+        'tradingMonthEod.updated',
+        'commodity.*',
+        'commodity.touched',
+    ],
 ];

@@ -61,22 +61,7 @@ class WebHook extends Model
      */
     public static function getPossibleEventsAttribute()
     {
-        return [
-                'tradingMonth.*',
-                'tradingMonth.created',
-                'tradingMonth.deleted',
-                'tradingMonth.updated',
-                'ifeMilkExchangeValue.*',
-                'ifeMilkExchangeValue.created',
-                'ifeMilkExchangeValue.deleted',
-                'ifeMilkExchangeValue.updated',
-                'tradingMonthEod.*',
-                'tradingMonthEod.created',
-                'tradingMonthEod.deleted',
-                'tradingMonthEod.updated',
-                'commodity.*',
-                'commodity.touched',
-        ];
+        return config('webhookable.possible_events');
     }
 
     /**
