@@ -2,8 +2,10 @@
 
 namespace KUHdo\Webhookable\Policies;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Contracts\Auth\Authenticatable;
+use KUHdo\Webhookable\Contracts\Webhookable;
 use KUHdo\Webhookable\WebHook;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -14,14 +16,17 @@ class WebHookPolicy
     /**
      * Determine whether the user can view the web hook.
      *
-     * @param  \App\User  $user
-     * @param  \App\WebHook  $webHook
+     * @param \KUHdo\Webhookable\Contracts\Webhookable $model
+     * @param \KUHdo\Webhookable\WebHook $webHook
      * @return mixed
      */
-    public function view(User $user, WebHook $webHook)
+    public function view(Model $model, WebHook $webHook)
     {
+        if(! $model instanceof Webhookable) {
+            return false;
+        }
         if($webHookUser = $webHook->webhookable()->first()) {
-            return $user->is($webHookUser);
+            return $model->is($webHookUser);
         }
         return false;
     }
@@ -29,26 +34,32 @@ class WebHookPolicy
     /**
      * Determine whether the user can create web hooks.
      *
-     * @param  \App\User  $user
+     * @param \Illuminate\Database\Eloquent\Model $model
      * @return mixed
      */
-    public function create(User $user)
+    public function create(Model $model)
     {
-        // TODO: check permission
-        return true;
+        if($model instanceof Webhookable) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
      * Determine whether the user can update the web hook.
      *
-     * @param  \App\User  $user
-     * @param  \App\WebHook  $webHook
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param \KUHdo\Webhookable\WebHook $webHook
      * @return mixed
      */
-    public function update(User $user, WebHook $webHook)
+    public function update(Model $model, WebHook $webHook)
     {
+        if(! $model instanceof Webhookable) {
+            return false;
+        }
         if($webHookUser = $webHook->webhookable()->first()) {
-            return $user->is($webHookUser);
+            return $model->is($webHookUser);
         }
         return false;
     }
@@ -56,14 +67,17 @@ class WebHookPolicy
     /**
      * Determine whether the user can delete the web hook.
      *
-     * @param  \App\User  $user
-     * @param  \App\WebHook  $webHook
+     * @param \KUHdo\Webhookable\Contracts\Webhookable $model
+     * @param \KUHdo\Webhookable\WebHook $webHook
      * @return mixed
      */
-    public function delete(User $user, WebHook $webHook)
+    public function delete(Webhookable $model, WebHook $webHook)
     {
+        if(! $model instanceof Webhookable) {
+            return false;
+        }
         if($webHookUser = $webHook->webhookable()->first()) {
-            return $user->is($webHookUser);
+            return $model->is($webHookUser);
         }
         return false;
     }
