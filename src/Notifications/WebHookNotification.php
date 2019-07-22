@@ -14,8 +14,6 @@ class WebHookNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    //public $tries = 10;
-
     /**
      * @var int
      */

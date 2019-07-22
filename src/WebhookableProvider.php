@@ -30,6 +30,7 @@ class WebhookableProvider extends ServiceProvider
         //$this->publishes([
         //__DIR__.'/translations' => resource_path('lang/vendor/webhookable'),
         //]);
+
     }
 
     /**
@@ -52,6 +53,7 @@ class WebhookableProvider extends ServiceProvider
             'KUHdo\Webhookable\Repositories\WebHookRepository',
             'KUHdo\Webhookable\Repositories\EloquentWebHook'
         );
+
 
     }
 }

@@ -2,7 +2,6 @@
 
 namespace KUHdo\Webhookable;
 
-use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Database\Eloquent\Model;
 
 class WebHook extends Model
@@ -95,7 +94,7 @@ class WebHook extends Model
     }
 
     /**
-     * Get all of the owning webhookable models.
+     * Get all models owning webhooks.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */

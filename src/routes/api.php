@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('api/')
+Route::prefix('api')
     ->middleware(['middleware' => 'auth:api'])
     ->group(function() {
         // Zapier route
