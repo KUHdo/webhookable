@@ -87,9 +87,9 @@ class WebHook extends Model
     /**
      * sets payload attribute
      *
-     * @param \Illuminate\Contracts\Support\Jsonable $payload
+     * @param $payload
      */
-    public function setPayloadAttribute(Jsonable $payload): void
+    public function setPayloadAttribute($payload): void
     {
         $this->payload = $payload;
     }

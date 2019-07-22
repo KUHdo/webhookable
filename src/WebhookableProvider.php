@@ -15,6 +15,7 @@ class WebhookableProvider extends ServiceProvider
     {
         //register routes
         $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
+
         // register migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
@@ -23,12 +24,12 @@ class WebhookableProvider extends ServiceProvider
             __DIR__.'/../database/migrations/' => database_path('migrations')
         ], 'migrations');
         $this->publishes([
-            __DIR__.'/../resources/js/components' => base_path('resources/js/components/webhookable'),
+            __DIR__.'/../resources/js/components' => resource_path('js/components/webhookable'),
         ], 'webhookable-components');
-
-        $this->publishes([
-        __DIR__.'/translations' => resource_path('lang/vendor/webhookable'),
-        ]);
+        // localization
+        //$this->publishes([
+        //__DIR__.'/translations' => resource_path('lang/vendor/webhookable'),
+        //]);
     }
 
     /**
@@ -43,8 +44,8 @@ class WebhookableProvider extends ServiceProvider
         }
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/passport.php' => config_path('passport.php'),
-            ], 'passport-config');
+                __DIR__.'/../config/webhookable.php' => config_path('webhookable.php'),
+            ], 'webhookable-config');
         }
 
         $this->app->bind(
